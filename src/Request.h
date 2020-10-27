@@ -23,6 +23,7 @@ public:
     {
         READ,
         WRITE,
+        CLONE,
         REFRESH,
         POWERDOWN,
         SELFREFRESH,

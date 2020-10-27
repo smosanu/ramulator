@@ -16,6 +16,7 @@
 #include "Gem5Wrapper.h"
 #include "DDR3.h"
 #include "DDR4.h"
+#include "DDR4RC.h"
 #include "DSARP.h"
 #include "GDDR5.h"
 #include "LPDDR3.h"
@@ -39,6 +40,7 @@ void run_dramtrace(const Config& configs, Memory<T, Controller>& memory, const c
 
     /* initialize DRAM trace */
     Trace trace(tracename);
+    printf("tracename=%s \n", tracename);
 
     /* run simulation */
     bool stall = false, end = false;
@@ -183,6 +185,7 @@ int main(int argc, const char *argv[])
         return 0;
     }
 
+    printf("[0]%s [1]%s [2]%s [3]%s \n", argv[0], argv[1], argv[2], argv[3]);
     Config configs(argv[1]);
 
     const std::string& standard = configs["standard"];
@@ -227,6 +230,9 @@ int main(int argc, const char *argv[])
     } else if (standard == "DDR4") {
       DDR4* ddr4 = new DDR4(configs["org"], configs["speed"]);
       start_run(configs, ddr4, files);
+    } else if (standard == "DDR4RC") {
+      DDR4RC* ddr4rc = new DDR4RC(configs["org"], configs["speed"]);
+      start_run(configs, ddr4rc, files);
     } else if (standard == "SALP-MASA") {
       SALP* salp8 = new SALP(configs["org"], configs["speed"], "SALP-MASA", configs.get_subarrays());
       start_run(configs, salp8, files);
