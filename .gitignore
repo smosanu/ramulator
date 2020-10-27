@@ -1,4 +1,6 @@
 *.swp
+*.stats
+*.cmdtrace
 
 # Compiled Object files
 obj/
