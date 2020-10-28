@@ -83,6 +83,7 @@ public:
 
     Queue readq;  // queue for read requests
     Queue writeq;  // queue for write requests
+    Queue rowcloneq;  // queue for rowclone requests
     Queue actq; // read and write requests for which activate was issued are moved to 
                    // actq, which has higher priority than readq and writeq.
                    // This is an optimization
@@ -305,6 +306,7 @@ public:
     {
         switch (int(type)) {
             case int(Request::Type::READ): return readq;
+            case int(Request::Type::ROWCLONE): return rowcloneq;
             case int(Request::Type::WRITE): return writeq;
             default: return otherq;
         }

@@ -51,6 +51,7 @@ protected:
   ScalarStat num_dram_cycles;
   ScalarStat num_incoming_requests;
   VectorStat num_read_requests;
+  VectorStat num_rowclone_requests;
   VectorStat num_write_requests;
   ScalarStat ramulator_active_cycles;
   VectorStat incoming_requests_per_channel;
@@ -176,6 +177,12 @@ public:
             .init(configs.get_core_num())
             .name("read_requests")
             .desc("Number of incoming read requests to DRAM per core")
+            .precision(0)
+            ;
+        num_rowclone_requests
+            .init(configs.get_core_num())
+            .name("rowclone_requests")
+            .desc("Number of incoming rowclone requests to DRAM per core")
             .precision(0)
             ;
         num_write_requests
@@ -338,6 +345,10 @@ public:
             if (req.type == Request::Type::READ) {
               ++num_read_requests[coreid];
               ++incoming_read_reqs_per_channel[req.addr_vec[int(T::Level::Channel)]];
+            }
+            if (req.type == Request::Type::ROWCLONE) {
+                printf("ROWCLONE Request\n");
+              ++num_rowclone_requests[coreid];
             }
             if (req.type == Request::Type::WRITE) {
               ++num_write_requests[coreid];

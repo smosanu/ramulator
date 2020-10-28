@@ -23,7 +23,7 @@ public:
     {
         READ,
         WRITE,
-        CLONE,
+        ROWCLONE, // ROWCLONE
         REFRESH,
         POWERDOWN,
         SELFREFRESH,
