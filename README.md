@@ -11,6 +11,7 @@ wide array of commercial, as well as academic, DRAM standards:
 - SALP \[2\]
 - TL-DRAM \[3\]
 - RowClone \[4\]
+  - Am attempting to implement a basic model for RowClone in this fork.
 - DSARP \[5\]
 
 The initial release of Ramulator is described in the following paper:
